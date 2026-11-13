@@ -34,8 +34,26 @@ export default function App(){
    supabase.from('market_listings').select('*,cards(*)').eq('active',true).order('created_at',{ascending:false}),
    supabase.from('market_requests').select('*,listing:market_listings(*,cards(*))').order('created_at',{ascending:false})
   ]);
-  if(c.error)throw c.error;if(i.error)throw i.error;
-  setCards(c.data||[]);const owned=(i.data||[]) as any[];setInventory(owned.map(item=>({...item,cards:Array.isArray(item.cards)?item.cards[0]:item.cards||((c.data||[]).find((card:any)=>card.id===item.card_id))})));setWallet(Number(w.data?.balance??0));setLastIncomeAt(w.data?.last_income_at?new Date(w.data.last_income_at).getTime():Date.now());setProfiles(p.data||[]);setTrades(t.data||[]);setAdmin(Boolean(me.data));setPacks(pa.data||[]);setMarketListings(ml.data||[]);setMarketRequests(mr.data||[]);
+  // Fail visibly if any required game data could not be loaded. Silent partial
+  // refreshes made the market, wallet or trades appear empty when RLS/API failed.
+  const failed=[c,i,w,p,t,me,pa,ml,mr].find(result=>result.error);
+  if(failed?.error)throw failed.error;
+
+  const catalog=(c.data||[]) as Card[];
+  const owned=(i.data||[]) as any[];
+  setCards(catalog);
+  setInventory(owned.map(item=>({
+   ...item,
+   cards:Array.isArray(item.cards)?item.cards[0]:item.cards||catalog.find(card=>card.id===item.card_id)
+  })));
+  setWallet(Number(w.data.balance));
+  setLastIncomeAt(w.data.last_income_at?new Date(w.data.last_income_at).getTime():Date.now());
+  setProfiles(p.data||[]);
+  setTrades(t.data||[]);
+  setAdmin(Boolean(me.data));
+  setPacks(pa.data||[]);
+  setMarketListings(ml.data||[]);
+  setMarketRequests(mr.data||[]);
  }
  useEffect(()=>{supabase.auth.getSession().then(({data})=>setSession(data.session));const {data:{subscription}}=supabase.auth.onAuthStateChange((_e,s)=>setSession(s));return()=>subscription.unsubscribe();},[]);
  useEffect(()=>{if(user){refresh().catch(fail)}else{setCards([]);setInventory([]);setAdmin(false)}},[user?.id]);

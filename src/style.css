@@ -313,3 +313,7 @@ button,input,select,textarea{touch-action:manipulation}
 .detail-sound{margin:0 auto 8px}
 @media(max-width:600px){.skip-reveal{top:12px;right:12px;padding:9px 13px}.reveal-title-stage{min-height:76px}.bot-sell-controls{gap:6px}}
 @media(prefers-reduced-motion:reduce){.fx-common .card-frame,.fx-rare .card-frame,.fx-epic .card-frame,.fx-og .card-frame{animation:none!important}}
+
+/* Admin image positioning controls + rarity-colored reveal keywords */
+.image-adjust-controls{display:grid;gap:10px;margin:14px 0;padding:15px;border:1px solid #394253;border-radius:12px;background:#141b27}
+.image-adjust-controls>b{font-size:13px;color:#f2d18b}.image-adjust-controls>small{font-size:10px;color:#aeb8c8}.image-adjust-controls label{display:grid;gap:5px;margin:0!important}.image-adjust-controls input[type=range]{width:100%;accent-color:#e8bd63}.reveal-tags span{background:color-mix(in srgb,var(--reveal-color),#10141d 76%)!important;border-color:var(--reveal-color)!important;color:#fff!important;text-shadow:0 0 10px var(--reveal-color)!important;box-shadow:0 0 16px color-mix(in srgb,var(--reveal-color),transparent 60%)}

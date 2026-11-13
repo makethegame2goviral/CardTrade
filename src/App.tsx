@@ -39,6 +39,8 @@ export default function App(){
   const failed=[c,i,w,p,t,me,pa,ml,mr].find(result=>result.error);
   if(failed?.error)throw failed.error;
 
+  if(!w.data)throw new Error('Dein Coin-Konto konnte nicht geladen werden. Bitte melde dich erneut an.');
+  const walletData=w.data;
   const catalog=(c.data||[]) as Card[];
   const owned=(i.data||[]) as any[];
   setCards(catalog);
@@ -46,8 +48,8 @@ export default function App(){
    ...item,
    cards:Array.isArray(item.cards)?item.cards[0]:item.cards||catalog.find(card=>card.id===item.card_id)
   })));
-  setWallet(Number(w.data.balance));
-  setLastIncomeAt(w.data.last_income_at?new Date(w.data.last_income_at).getTime():Date.now());
+  setWallet(Number(walletData.balance));
+  setLastIncomeAt(walletData.last_income_at?new Date(walletData.last_income_at).getTime():Date.now());
   setProfiles(p.data||[]);
   setTrades(t.data||[]);
   setAdmin(Boolean(me.data));

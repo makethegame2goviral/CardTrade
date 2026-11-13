@@ -194,3 +194,35 @@ button,input,select,textarea{touch-action:manipulation}
 .audio-recorder>small{display:block;color:#aeb8c8;margin-bottom:12px}
 .audio-recorder .success{color:#7ee0a3}
 .admin-card-actions{display:flex;flex-wrap:wrap;gap:8px}
+
+
+/* High-impact vertical pack reveal, inspired by short-form football pack openings */
+.pack-opening-overlay.stage-4{overflow:hidden;background:radial-gradient(ellipse at 50% 42%,#6e5426 0%,#171725 38%,#05070d 78%);isolation:isolate}
+.pack-opening-overlay.stage-4:before{content:"";position:absolute;z-index:-1;width:140vmax;height:140vmax;border-radius:50%;background:repeating-conic-gradient(from 0deg,transparent 0deg 7deg,#ffe8a533 7.4deg 8deg,transparent 8.4deg 15deg);animation:short-rays 13s linear infinite}
+.pack-opening-overlay.stage-4:after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at center,transparent 12%,#05070c88 72%);animation:short-vignette 1.1s ease-in-out infinite alternate}
+.stage-4 .reveal-show{min-height:78vh;justify-content:center;gap:14px}
+.stage-4 .reveal-show:before{content:"";position:absolute;width:min(88vw,520px);aspect-ratio:1;border:2px solid #ffe9a8aa;border-radius:50%;box-shadow:0 0 35px #ffd15d,0 0 100px #ffb32d88,inset 0 0 55px #fff5;animation:short-ring .85s ease-out infinite;pointer-events:none}
+.stage-4 .reveal-show:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 28%,#fff5 48%,transparent 65%);transform:translateX(-130%);animation:short-sweep 1.35s .2s ease-out infinite;pointer-events:none}
+.stage-4 .reveal-flash{font-size:clamp(68px,13vw,112px);z-index:2;animation:short-star .55s ease-in-out infinite alternate}
+.stage-4 .reveal-kicker,.stage-4 .reveal-tags,.stage-4 .reveal-card-wrap,.stage-4 .reveal-player-name,.stage-4 .reveal-rating{z-index:2}
+.stage-4 .reveal-kicker{font-size:clamp(18px,4vw,25px);letter-spacing:6px;text-shadow:0 0 12px #fff,0 0 35px #ffc34d}
+.stage-4 .reveal-card-wrap{width:min(245px,62vw);filter:drop-shadow(0 0 18px #fff9) drop-shadow(0 0 55px #ffc34d);animation:short-card-impact .8s cubic-bezier(.12,1.5,.3,1) .2s both}
+.stage-4 .reveal-card-wrap .card-frame{height:clamp(280px,53vh,390px);border-width:2px;box-shadow:0 0 25px #fff8,inset 0 0 28px #ffe9a533}
+.stage-4 .reveal-player-name{font-size:clamp(38px,9vw,68px);text-shadow:0 0 10px #fff,0 0 28px #fff,0 0 65px #ffbd3d}
+.stage-4 .reveal-rating{font-size:14px}
+.multi-pull-result{display:block;overflow:hidden}
+.multi-pull-result>div{width:100%;min-width:0}
+.multi-pull-result>div>p{font-size:11px;letter-spacing:2px;color:#f4ce76;font-weight:900}
+.multi-pull-stack{display:flex;align-items:center;overflow-x:auto;overscroll-behavior-x:contain;padding:20px 20px 26px 12px;scrollbar-width:thin}
+.multi-pull-card{position:relative;flex:0 0 170px;width:170px;margin-left:-54px;transition:transform .2s ease,filter .2s ease}
+.multi-pull-card:first-child{margin-left:0}
+.multi-pull-card:hover{z-index:30;transform:translateY(-12px) scale(1.04);filter:drop-shadow(0 10px 18px #000b)}
+.multi-pull-card .trading-card{width:100%}
+@keyframes short-rays{to{transform:rotate(360deg)}}
+@keyframes short-vignette{from{opacity:.45}to{opacity:.9}}
+@keyframes short-ring{0%{transform:scale(.62) rotate(0);opacity:.15}55%{opacity:.8}100%{transform:scale(1.18) rotate(24deg);opacity:0}}
+@keyframes short-sweep{0%,25%{transform:translateX(-130%)}75%,100%{transform:translateX(130%)}}
+@keyframes short-star{from{transform:scale(.82) rotate(-14deg)}to{transform:scale(1.18) rotate(14deg)}}
+@keyframes short-card-impact{0%{opacity:0;transform:translateY(100px) scale(.35) rotateY(95deg)}58%{opacity:1;transform:translateY(-16px) scale(1.12) rotateY(-10deg)}78%{transform:translateY(5px) scale(.97)}100%{opacity:1;transform:translateY(0) scale(1) rotateY(0)}}
+@media(max-width:600px){.multi-pull-card{flex-basis:145px;width:145px;margin-left:-48px}.stage-4 .reveal-show{min-height:78vh}.stage-4 .reveal-card-wrap{width:min(220px,60vw)}}
+@media(prefers-reduced-motion:reduce){.pack-opening-overlay.stage-4:before,.pack-opening-overlay.stage-4:after,.stage-4 .reveal-show:before,.stage-4 .reveal-show:after{animation:none!important}}

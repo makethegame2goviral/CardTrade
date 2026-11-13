@@ -270,3 +270,46 @@ button,input,select,textarea{touch-action:manipulation}
   .card-detail-art .card-frame{height:clamp(390px,62vh,520px)}
 }
 
+
+
+/* Cinematic reveal sequence: each line arrives separately */
+.reveal-show{--reveal-color:#d5dbe8}
+.rarity-reveal-common{--reveal-color:#c4c9d2}
+.rarity-reveal-rare{--reveal-color:#4da6ff}
+.rarity-reveal-epic{--reveal-color:#b47aff}
+.rarity-reveal-legendary{--reveal-color:#ffc34d}
+.rarity-reveal-mythic{--reveal-color:#ff4b55}
+.rarity-reveal-og{--reveal-color:#f5f5f5}
+.reveal-show:before{border-color:color-mix(in srgb,var(--reveal-color),transparent 15%)!important;box-shadow:0 0 38px var(--reveal-color),0 0 105px color-mix(in srgb,var(--reveal-color),transparent 40%),inset 0 0 55px color-mix(in srgb,var(--reveal-color),transparent 55%)!important}
+.reveal-show .reveal-flash,.reveal-show .reveal-kicker{color:var(--reveal-color);text-shadow:0 0 18px var(--reveal-color),0 0 45px var(--reveal-color)}
+.reveal-title-stage{display:grid;gap:8px;min-height:92px;align-content:center;justify-items:center;z-index:3}
+.reveal-title-stage strong{display:block;font:1000 clamp(30px,8vw,62px)/.95 'Barlow Condensed';letter-spacing:2px;text-transform:uppercase;color:#fff;text-shadow:0 0 12px var(--reveal-color),0 0 36px var(--reveal-color);animation:reveal-rise .48s cubic-bezier(.2,1.3,.3,1) both}
+.reveal-tags{min-height:40px;z-index:3}
+.reveal-tags span{opacity:0;visibility:hidden;transform:translateY(16px) scale(.8);animation:none!important}
+.reveal-tags span.shown{visibility:visible;animation:reveal-tag-in .5s cubic-bezier(.2,1.4,.4,1) forwards!important;border-color:var(--reveal-color);box-shadow:0 0 18px color-mix(in srgb,var(--reveal-color),transparent 50%)}
+.reveal-card-wrap{filter:drop-shadow(0 0 22px var(--reveal-color)) drop-shadow(0 0 52px color-mix(in srgb,var(--reveal-color),transparent 30%))!important}
+.skip-reveal{position:absolute;right:max(18px,env(safe-area-inset-right));top:max(18px,env(safe-area-inset-top));z-index:20;border:1px solid #ffffff88;border-radius:999px;padding:11px 17px;background:#151b27dd;color:white;font:900 12px 'Barlow Condensed';letter-spacing:1.5px;box-shadow:0 0 18px #0008}
+.skip-reveal:hover{background:#ffffff25;transform:scale(1.04)}
+/* Every rarity gets its own persistent card glow */
+.fx-common .card-frame{border-color:#c4c9d2;box-shadow:inset 0 0 13px #c4c9d233}
+.fx-rare .card-frame{border-color:#4da6ff;box-shadow:inset 0 0 18px #4da6ff55,0 0 10px #4da6ff66}
+.fx-epic .card-frame{border-color:#b47aff}
+.fx-legendary .card-frame{border-color:#ffc34d}
+.fx-mythic .card-frame{border-color:#ff4b55}
+.fx-og .card-frame{border-color:#f5f5f5}
+.fx-common .card-frame:after,.fx-rare .card-frame:after,.fx-epic .card-frame:after,.fx-legendary .card-frame:after,.fx-mythic .card-frame:after,.fx-og .card-frame:after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:4;box-shadow:inset 0 0 18px color-mix(in srgb,var(--rarity),transparent 45%)}
+.fx-common .card-frame{animation:rarity-common 3.5s ease-in-out infinite}
+.fx-rare .card-frame{animation:rarity-rare 2.8s ease-in-out infinite}
+.fx-epic .card-frame{animation:rarity-epic 2.2s ease-in-out infinite}
+.fx-og .card-frame{animation:rarity-og 2.7s ease-in-out infinite}
+@keyframes rarity-common{50%{filter:brightness(1.08)}}
+@keyframes rarity-rare{50%{filter:brightness(1.16) drop-shadow(0 0 8px #4da6ff)}}
+@keyframes rarity-epic{50%{filter:brightness(1.2) drop-shadow(0 0 10px #b47aff)}}
+@keyframes rarity-og{50%{filter:brightness(1.2) contrast(1.08)}}
+.bot-sell-controls{display:grid;gap:7px;margin-top:8px}
+.bot-sell-controls label{display:grid;gap:5px;color:#aeb8c8;font-size:10px}
+.bot-sell-controls select{width:100%;min-width:0}
+.bot-sell-controls .bot-sell{margin:0}
+.detail-sound{margin:0 auto 8px}
+@media(max-width:600px){.skip-reveal{top:12px;right:12px;padding:9px 13px}.reveal-title-stage{min-height:76px}.bot-sell-controls{gap:6px}}
+@media(prefers-reduced-motion:reduce){.fx-common .card-frame,.fx-rare .card-frame,.fx-epic .card-frame,.fx-og .card-frame{animation:none!important}}

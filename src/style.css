@@ -188,3 +188,9 @@ button,input,select,textarea{touch-action:manipulation}
 @keyframes reveal-card-in{0%{opacity:0;transform:translateY(80px) scale(.55) rotateY(80deg)}65%{opacity:1;transform:translateY(-12px) scale(1.06) rotateY(-8deg)}100%{opacity:1;transform:translateY(0) scale(1) rotateY(0)}}
 @keyframes reveal-rise{from{opacity:0;transform:translateY(25px);filter:blur(8px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
 @media(max-width:600px){.reveal-card-wrap .card-frame{height:260px}.reveal-tags{gap:5px}.reveal-tags span{padding:7px 9px;font-size:13px}.card-detail-art .card-frame{height:300px}}
+
+.audio-recorder{margin:18px 0;padding:16px;border:1px solid #6b728055;border-radius:14px;background:linear-gradient(135deg,#171d2a,#222b3b)}
+.audio-recorder>b{display:block;font-weight:900;margin-bottom:5px}
+.audio-recorder>small{display:block;color:#aeb8c8;margin-bottom:12px}
+.audio-recorder .success{color:#7ee0a3}
+.admin-card-actions{display:flex;flex-wrap:wrap;gap:8px}

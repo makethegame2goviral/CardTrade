@@ -150,3 +150,41 @@ button,input,select,textarea{touch-action:manipulation}
 @keyframes mythic-pulse{0%,100%{filter:drop-shadow(0 0 3px #ff344c)}50%{filter:drop-shadow(0 0 13px #ff344c)}}
 @keyframes og-glint{0%,100%{filter:brightness(1)}50%{filter:brightness(1.16) contrast(1.08)}}
 @media(prefers-reduced-motion:reduce){.pack-opening-overlay,.opening-pack,.fx-epic .card-frame,.fx-legendary .card-frame,.fx-mythic .card-frame,.fx-og .card-frame{animation:none!important}}
+
+
+/* Cinematic player reveal + clean collectible card face */
+.card-info small,.card-highlights,.card-info>div span:last-child{display:none!important}
+.card-info>div{justify-content:flex-start!important;font-size:10px!important;color:#f3d58d!important}
+.card-clickable{cursor:pointer;transition:transform .22s ease,filter .22s ease}
+.card-clickable:hover{transform:translateY(-7px) scale(1.025);filter:brightness(1.12)}
+.card-detail-backdrop{position:fixed;inset:0;z-index:1200;background:#05070deF;backdrop-filter:blur(12px);display:grid;place-items:center;padding:20px;animation:overlay-in .2s ease-out}
+.card-detail-modal{position:relative;width:min(420px,100%);max-height:90vh;overflow:auto;background:radial-gradient(circle at 50% 0,#343c4f,#141923 62%);border:1px solid #596273;border-radius:22px;padding:28px 22px 24px;text-align:center;box-shadow:0 0 70px #d7ad5540,0 25px 90px #000c}
+.card-detail-close{position:absolute;right:13px;top:10px;z-index:5;border:0;background:#ffffff18;color:white;border-radius:50%;width:36px;height:36px;font-size:25px}
+.card-detail-art{width:min(245px,80%);margin:4px auto 20px}
+.card-detail-art .trading-card{width:100%}
+.card-detail-art .card-frame{height:330px}
+.card-detail-modal h2{font:900 34px 'Barlow Condensed';margin:10px 0 5px}
+.card-detail-modal>p{font:800 12px 'Barlow Condensed';letter-spacing:1.4px;color:#f3d58d}
+.reveal-show{width:min(520px,94vw);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;position:relative}
+.reveal-flash{font-size:68px;line-height:1;color:#ffe9a6;text-shadow:0 0 18px #fff,0 0 55px #ffc34d;animation:reveal-star .8s ease-in-out infinite alternate}
+.reveal-kicker{font:900 17px 'Barlow Condensed';letter-spacing:5px;color:#ffe4a0;text-shadow:0 0 22px #ffc34d;animation:reveal-rise .45s both}
+.reveal-tags{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;min-height:44px;max-width:95vw}
+.reveal-tags span{font:900 clamp(13px,3vw,21px) 'Barlow Condensed';letter-spacing:2px;text-transform:uppercase;color:#fff;text-shadow:0 0 12px #fff,0 0 25px #d5a448;background:linear-gradient(100deg,#272d3a,#7b5b2b,#272d3a);border:1px solid #ffe5a1;border-radius:8px;padding:8px 13px;opacity:0;transform:translateY(22px) scale(.7);animation:reveal-tag-in .55s cubic-bezier(.2,1.4,.4,1) forwards}
+.reveal-card-wrap{width:min(220px,56vw);margin-top:5px;animation:reveal-card-in .9s cubic-bezier(.16,1.2,.3,1) .3s both;filter:drop-shadow(0 0 28px #f7ca6c99)}
+.reveal-card-wrap .trading-card{width:100%}
+.reveal-card-wrap .card-frame{height:290px}
+.reveal-player-name{font:1000 clamp(34px,8vw,58px) 'Barlow Condensed';line-height:.95;margin:2px 0;color:#fff;text-transform:uppercase;text-shadow:0 0 18px #fff,0 0 38px #f5bd4d;animation:reveal-rise .5s .65s both}
+.reveal-rating{font:900 12px 'Barlow Condensed';letter-spacing:2px;color:#ffdf91;text-shadow:0 0 14px #ffbf47}
+.reveal-rating span,.card-detail-modal p span{color:#fff;padding:0 6px}
+.stage-2 .opening-pack,.stage-3 .opening-pack{position:relative;filter:brightness(1.2);box-shadow:0 0 30px #ffca60,0 0 70px #ff9e3d,inset 0 0 35px #fff7}
+.stage-2 .opening-pack:before,.stage-2 .opening-pack:after,.stage-3 .opening-pack:before,.stage-3 .opening-pack:after{content:"";position:absolute;inset:8%;border:2px solid #fff0b3;clip-path:polygon(0 0,40% 12%,28% 42%,65% 55%,48% 100%,100% 70%,72% 35%,100% 0);animation:fracture-flash .28s infinite alternate}
+.stage-3 .opening-pack{animation:pack-crack .09s infinite alternate,fracture-shake .12s infinite}
+.stage-3 .opening-pack:before{inset:-10%;transform:rotate(22deg) scale(1.15)}
+.stage-3 .opening-pack:after{inset:-17%;transform:rotate(-28deg) scale(.9)}
+@keyframes fracture-flash{from{opacity:.25;filter:brightness(1)}to{opacity:1;filter:brightness(2)}}
+@keyframes fracture-shake{0%{transform:translate(-5px,2px) rotate(-8deg) scale(1.02)}50%{transform:translate(5px,-2px) rotate(8deg) scale(1.07)}100%{transform:translate(-3px,3px) rotate(-6deg) scale(1.04)}}
+@keyframes reveal-star{from{transform:scale(.8) rotate(-12deg)}to{transform:scale(1.15) rotate(12deg)}}
+@keyframes reveal-tag-in{0%{opacity:0;transform:translateY(22px) scale(.7);filter:blur(8px)}75%{opacity:1;transform:translateY(-4px) scale(1.08);filter:blur(0)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes reveal-card-in{0%{opacity:0;transform:translateY(80px) scale(.55) rotateY(80deg)}65%{opacity:1;transform:translateY(-12px) scale(1.06) rotateY(-8deg)}100%{opacity:1;transform:translateY(0) scale(1) rotateY(0)}}
+@keyframes reveal-rise{from{opacity:0;transform:translateY(25px);filter:blur(8px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@media(max-width:600px){.reveal-card-wrap .card-frame{height:260px}.reveal-tags{gap:5px}.reveal-tags span{padding:7px 9px;font-size:13px}.card-detail-art .card-frame{height:300px}}

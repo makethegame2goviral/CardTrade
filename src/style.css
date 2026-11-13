@@ -9,3 +9,95 @@
 
 .card-frame>img.card-image-full{inset:34px 0 65px;width:100%;height:150px;object-fit:cover;object-position:center;border-radius:5px;filter:none;z-index:2}
 .card-frame>img.card-image-cutout{inset:38px 8px 65px;width:calc(100% - 16px);height:142px;object-fit:contain;object-position:center;filter:drop-shadow(0 12px 12px #000b) drop-shadow(0 0 10px #ffffff18);z-index:2}
+
+
+/* Responsive layout: phone portrait, phone landscape and tablet rotations */
+html{min-width:320px;min-height:100%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:hidden}
+.content{width:calc(100% - 248px);min-width:0}
+.content>*{min-width:0}
+.content input,.content select,.content textarea,.auth-card input{min-width:0;max-width:100%}
+.market-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
+.market-card{min-width:0;background:#1b202b;border:1px solid #303746;border-radius:13px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.market-card .trading-card{width:100%}
+.market-card>small{color:#8f98a8;font-size:10px}
+.market-card>strong{color:#efc76d;font:800 20px 'Barlow Condensed'}
+.market-card .primary{width:100%}
+.market-search{max-width:240px}
+.market-requests-title{margin-top:26px!important}
+.bot-sell{width:100%;margin-top:5px}
+.trade-reply{display:flex;flex-wrap:wrap;gap:8px;align-items:end}
+.trade-reply label{min-width:170px}
+.trade-form-wide{grid-template-columns:repeat(3,minmax(0,1fr)) auto}
+.admin-card{min-width:0}
+.admin-card .trading-card{width:100%}
+.trading-card img{max-width:100%}
+img{max-width:100%}
+button,input,select,textarea{touch-action:manipulation}
+.sidebar nav{min-width:0}
+.sidebar nav button{white-space:nowrap}
+@media(max-width:900px){
+ .content{width:calc(100% - 78px)}
+ .trade-form-wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px){
+ .content{width:100%;min-width:0}
+ .sidebar nav{overflow-x:auto;overflow-y:hidden;justify-content:flex-start;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+ .sidebar nav::-webkit-scrollbar{display:none}
+ .sidebar nav button{flex:0 0 68px;min-width:68px;min-height:54px;white-space:normal;line-height:1.1}
+ .content header{gap:10px}
+ .content header>div:first-child{min-width:0}
+ .top-wallet{flex:0 0 auto;gap:6px}
+ .hero{width:100%}
+ .section-head{gap:10px;align-items:center}
+ .section-head h3{font-size:20px}
+ .market-search{max-width:48%;font-size:11px!important;padding:10px!important}
+ .market-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .market-card{padding:8px}
+ .trade-form,.trade-form-wide,.form-row{grid-template-columns:minmax(0,1fr)}
+ .trade-form>*{min-width:0}
+ .trade-panel,.admin-form{padding:16px}
+ .trade-reply{width:100%}
+ .trade-reply label{width:100%}
+ .admin-card-actions{grid-template-columns:1fr}
+ .stats>div{min-width:0}
+ .stats small{font-size:8px;letter-spacing:.7px}
+ .stats b{overflow-wrap:anywhere}
+ .card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:380px){
+ .content{padding-left:11px;padding-right:11px}
+ .card-grid{gap:7px}
+ .card-frame{height:205px;padding:8px}
+ .card-info strong{font-size:16px}
+ .card-info>div{font-size:7px}
+ .top-wallet{padding:7px 9px}
+ .content h2{font-size:25px}
+}
+@media (orientation:landscape) and (max-height:600px) and (max-width:1100px){
+ .sidebar{inset:auto 0 0;width:100%;height:62px;padding:3px 8px;background:#171c26;border:0;border-top:1px solid #303746;z-index:20}
+ .brand,.side-bottom{display:none}
+ .sidebar nav{height:100%;display:flex;align-items:center;justify-content:flex-start;gap:4px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+ .sidebar nav::-webkit-scrollbar{display:none}
+ .sidebar nav button{flex:0 0 76px;min-width:76px;height:54px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:3px 2px;font-size:9px!important;white-space:normal}
+ .sidebar nav button span{font-size:17px;width:auto}
+ .content{width:100%;margin:0;padding:13px 18px 82px}
+ .content header{margin-bottom:12px}
+ .content h2{font-size:26px}
+ .hero{min-height:220px;padding:20px 25px}
+ .hero h1{font-size:42px}
+ .hero-art{height:190px}
+ .stats{margin:10px 0 18px;gap:8px}
+ .stats>div{padding:10px 13px}
+ .card-grid{grid-template-columns:repeat(auto-fill,minmax(145px,1fr))}
+ .card-frame{height:215px}
+ .trade-panel,.admin-form{padding:16px}
+}
+@media (orientation:landscape) and (max-height:430px) and (max-width:900px){
+ .sidebar{height:56px}
+ .sidebar nav button{height:49px;flex-basis:70px;min-width:70px}
+ .content{padding-top:9px;padding-bottom:70px}
+ .content header{margin-bottom:8px}
+ .hero{min-height:190px}
+ .hero-art{transform:scale(.72)}
+}

@@ -226,3 +226,47 @@ button,input,select,textarea{touch-action:manipulation}
 @keyframes short-card-impact{0%{opacity:0;transform:translateY(100px) scale(.35) rotateY(95deg)}58%{opacity:1;transform:translateY(-16px) scale(1.12) rotateY(-10deg)}78%{transform:translateY(5px) scale(.97)}100%{opacity:1;transform:translateY(0) scale(1) rotateY(0)}}
 @media(max-width:600px){.multi-pull-card{flex-basis:145px;width:145px;margin-left:-48px}.stage-4 .reveal-show{min-height:78vh}.stage-4 .reveal-card-wrap{width:min(220px,60vw)}}
 @media(prefers-reduced-motion:reduce){.pack-opening-overlay.stage-4:before,.pack-opening-overlay.stage-4:after,.stage-4 .reveal-show:before,.stage-4 .reveal-show:after{animation:none!important}}
+
+/* Larger, centered card artwork — including the collection detail view */
+.card-frame>img.card-image-cutout,
+.card-frame>img.card-image-full{
+  top:38px!important;
+  left:6px!important;
+  right:6px!important;
+  bottom:68px!important;
+  width:calc(100% - 12px)!important;
+  height:auto!important;
+  max-height:calc(100% - 106px)!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+}
+.card-detail-modal{
+  width:min(520px,96vw);
+  max-height:96vh;
+  padding:42px 24px 28px;
+}
+.card-detail-art{
+  width:min(360px,86vw);
+  margin:0 auto 18px;
+}
+.card-detail-art .card-frame{
+  height:clamp(430px,68vh,620px);
+}
+.card-detail-art .card-frame>img.card-image-cutout,
+.card-detail-art .card-frame>img.card-image-full{
+  top:48px!important;
+  left:8px!important;
+  right:8px!important;
+  bottom:94px!important;
+  width:calc(100% - 16px)!important;
+  height:auto!important;
+  max-height:calc(100% - 142px)!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+}
+@media(max-width:600px){
+  .card-detail-modal{width:min(440px,96vw);padding:42px 14px 22px}
+  .card-detail-art{width:min(330px,84vw)}
+  .card-detail-art .card-frame{height:clamp(390px,62vh,520px)}
+}
+

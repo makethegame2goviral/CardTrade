@@ -472,3 +472,6 @@ button,input,select,textarea{touch-action:manipulation}
 .admin-player-entry .admin-player-row{border:0;background:transparent;padding:5px 3px;min-width:0}
 .admin-player-entry>button:last-child{white-space:nowrap}
 @media(max-width:620px){.admin-player-entry{grid-template-columns:1fr}.admin-player-entry>button:last-child{width:100%}.admin-pack-row .row-actions{width:100%}.admin-pack-row .row-actions button{flex:1}}
+
+.album-sell-actions{display:flex;flex-direction:column;gap:6px;margin-top:8px;width:100%}
+.album-sell-actions button{width:100%;font-size:11px;padding:8px 9px;white-space:normal;line-height:1.3}

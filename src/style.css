@@ -458,3 +458,9 @@ button,input,select,textarea{touch-action:manipulation}
 .trading-card .card-frame>img.card-image-cutout{inset:38px 8px 65px;width:calc(100% - 16px);height:auto;object-fit:contain;}
 .trading-card .card-frame>img.card-image-full{inset:34px 0 65px;width:100%;height:auto;object-fit:cover;}
 /* The image area grows with the card instead of staying at a fixed 142px. */
+
+/* Full-screen pack reveal clip: autoplay with its own synchronized audio. */
+.stage-4 .reveal-show:has(.reveal-full-video){width:100vw;height:100dvh;max-width:none;justify-content:center;gap:0;}
+.reveal-full-video{position:fixed;inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;object-fit:contain;background:#05070b;z-index:2;border:0;border-radius:0;}
+.stage-4:has(.reveal-full-video) .reveal-flash,.stage-4:has(.reveal-full-video) .reveal-kicker,.stage-4:has(.reveal-full-video) .reveal-title-stage,.stage-4:has(.reveal-full-video) .reveal-tags,.stage-4:has(.reveal-full-video) .reveal-player-name,.stage-4:has(.reveal-full-video) .reveal-rating{display:none;}
+.stage-4:has(.reveal-full-video) .skip-reveal{z-index:10;}

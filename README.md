@@ -1,4 +1,4 @@
-# Cardsnoscam
+# Carddex
 
 Responsive Sammelkarten-Spiel mit React, Vite, TypeScript und Supabase.
 

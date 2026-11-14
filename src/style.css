@@ -459,3 +459,7 @@ button,input,select,textarea{touch-action:manipulation}
 .trading-card .card-frame>img.card-image-full{inset:34px 0 65px;width:100%;height:auto;object-fit:cover;}
 /* The image area grows with the card instead of staying at a fixed 142px. */
 
+
+/* Match saved background-image cards to the live editor preview. */
+.card-frame>img.card-image-full{inset:38px 8px 65px!important;width:calc(100% - 16px)!important;height:calc(100% - 103px)!important;object-fit:contain!important;object-position:center!important;}
+.card-frame>img.card-image-cutout{height:calc(100% - 103px)!important;}

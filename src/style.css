@@ -371,3 +371,18 @@ button,input,select,textarea{touch-action:manipulation}
 .event-pack-links>div{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#252c39;padding:12px;border-radius:9px}
 .event-pack-links span{color:#efc76d;font-size:11px}
 @media(max-width:700px){.admin-console-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.leaderboard-columns{grid-template-columns:1fr}.admin-event-row{align-items:flex-start;flex-direction:column}.admin-event-row button{width:100%}}
+
+
+/* Player missions and card album sorting */
+.mission-grid{display:grid;gap:14px;margin:22px 0}
+.mission-card{display:flex;align-items:center;gap:16px;padding:18px;border:1px solid #354154;border-radius:16px;background:linear-gradient(135deg,#1b2432,#111722)}
+.mission-icon{width:54px;height:54px;flex:0 0 54px;display:grid;place-items:center;border-radius:14px;background:#3a3021;color:#f5d38c;font-size:25px}
+.mission-copy{flex:1;min-width:0}
+.mission-copy h3{margin:0 0 5px;font:900 23px 'Barlow Condensed';text-transform:uppercase}
+.mission-copy p{margin:0 0 11px;color:#aeb8c8;font-size:12px}
+.mission-copy small{display:block;margin-top:7px;color:#d9c28e;font-size:10px;font-weight:800}
+.mission-progress{height:8px;overflow:hidden;border-radius:99px;background:#303949}
+.mission-progress span{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#a87936,#f2d18a);transition:width .25s}
+.mission-card>button{min-width:145px}
+.section-head select{max-width:210px}
+@media(max-width:650px){.mission-card{align-items:flex-start;flex-wrap:wrap}.mission-copy{min-width:calc(100% - 75px)}.mission-card>button{width:100%}.section-head select{max-width:155px}}

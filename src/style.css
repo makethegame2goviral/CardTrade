@@ -463,3 +463,12 @@ button,input,select,textarea{touch-action:manipulation}
 /* Match saved background-image cards to the live editor preview. */
 .card-frame>img.card-image-full{inset:38px 8px 65px!important;width:calc(100% - 16px)!important;height:calc(100% - 103px)!important;object-fit:contain!important;object-position:center!important;}
 .card-frame>img.card-image-cutout{height:calc(100% - 103px)!important;}
+
+/* Admin controls for pack availability and per-player offline income. */
+.admin-pack-row{flex-wrap:wrap}
+.admin-pack-row>div:first-child{flex:1;min-width:150px}
+.admin-pack-row .row-actions{display:flex;gap:8px;flex-wrap:wrap}
+.admin-player-entry{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;padding:9px 12px;background:#1b202b;border:1px solid #303746;border-radius:11px}
+.admin-player-entry .admin-player-row{border:0;background:transparent;padding:5px 3px;min-width:0}
+.admin-player-entry>button:last-child{white-space:nowrap}
+@media(max-width:620px){.admin-player-entry{grid-template-columns:1fr}.admin-player-entry>button:last-child{width:100%}.admin-pack-row .row-actions{width:100%}.admin-pack-row .row-actions button{flex:1}}

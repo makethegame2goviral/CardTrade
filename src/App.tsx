@@ -157,7 +157,7 @@ export default function App(){
  const income=useMemo(()=>inventory.reduce((sum,i)=>sum+Number(i.cards?.income_per_second||0)*i.quantity,0),[inventory]);
  const displayedWallet=wallet+income*Math.max(0,(clockNow-lastIncomeAt)/1000);
  const activeCards=useMemo(()=>cards.filter(c=>c.active),[cards]);
- const patrickJaneCard=cards.find(c=>/patrick\\s*jane/i.test(c.name));
+ const patrickJaneCard=cards.find(c=>/patrick\s*jane/i.test(c.name));
  const rarityOrder:Record<string,number>={OG:6,MYTHIC:5,LEGENDARY:4,EPIC:3,RARE:2,COMMON:1};
  const sortedInventory=useMemo(()=>[...inventory].sort((a,b)=>{const diff=(rarityOrder[String(b.cards?.rarity||'').toUpperCase()]||0)-(rarityOrder[String(a.cards?.rarity||'').toUpperCase()]||0);return raritySort==='rarity-asc'?-diff:diff;}),[inventory,raritySort]);
  const nav=[['home','⌂','Start'],['packs','▣','Karten ziehen'],['collection','▤','Kartenalbum'],['current','▣','Aktuelle Karten'],['profile','♙','Profil'],['missions','🎯','Missionen'],['market','◈','Markt'],['arena','⚔','Arena'],['leaderboard','🏆','Rangliste'],['events','✦','Events'],['trades','⇄','Trades'],['secret','⌘','Secret Codes'],...(admin ? [['admin','⚙','Admin']] : []),['info','ⓘ','Info']];

@@ -49,10 +49,12 @@ export default function App(){
  const [selectedPackCardIds,setSelectedPackCardIds]=useState<string[]>([]);
  const [selectedAdminPlayer,setSelectedAdminPlayer]=useState(''),[adminGrantCard,setAdminGrantCard]=useState(''),[adminGrantPack,setAdminGrantPack]=useState(''),[adminQuantity,setAdminQuantity]=useState('1'),[adminCoins,setAdminCoins]=useState('1000'),[adminSetCoins,setAdminSetCoins]=useState('1000'),[adminPlayerInventory,setAdminPlayerInventory]=useState<any[]>([]),[boostMinutes,setBoostMinutes]=useState('60');
  const user=session?.user;
+ const refreshRunRef=useRef(0);
  const notify=(s:string)=>{setNotice(s);setError('');};
  const fail=(e:any)=>{setError(e?.message||'Etwas ist schiefgelaufen.');setNotice('');};
  async function refresh(){
   if(!user)return;
+  const refreshRun=++refreshRunRef.current;
   const [c,i,w,p,t,me,pa,ml,mr,h]=await Promise.all([
    supabase.from('cards').select('*').order('created_at',{ascending:false}),
    supabase.from('inventory').select('id,card_id,quantity,cards(*)').eq('user_id',user.id),
@@ -65,6 +67,8 @@ export default function App(){
    supabase.from('market_requests').select('*,listing:market_listings(*,cards(*))').order('created_at',{ascending:false}),
    supabase.from('card_collection_history').select('card_id').eq('user_id',user.id)
   ]);
+  // Ignore stale responses: overlapping refreshes must never overwrite newer wallet data.
+  if(refreshRun!==refreshRunRef.current)return;
   // Fail visibly if any required game data could not be loaded. Silent partial
   // refreshes made the market, wallet or trades appear empty when RLS/API failed.
   const failed=[c,i,w,p,t,me,pa,ml,mr,h].find(result=>result.error);
@@ -100,7 +104,7 @@ export default function App(){
  useEffect(()=>{if(tab==='admin'&&admin&&adminSection==='players')void loadAdminPlayers();},[tab,admin,adminSection]);
   useEffect(()=>{if(tab==='admin'&&admin&&adminSection==='players'&&selectedAdminPlayer)void loadAdminPlayerInventory(selectedAdminPlayer);else setAdminPlayerInventory([]);},[tab,admin,adminSection,selectedAdminPlayer]);
  useEffect(()=>{const timer=window.setInterval(()=>setClockNow(Date.now()),1000);return()=>window.clearInterval(timer)},[]);
- useEffect(()=>{if(!user)return;let active=true;const collect=async()=>{const {error}=await supabase.rpc('claim_card_income');if(!error&&active)await refresh().catch(()=>{});};collect();const timer=window.setInterval(collect,10000);return()=>{active=false;window.clearInterval(timer)};},[user?.id]);
+ useEffect(()=>{if(!user)return;let active=true;let collecting=false;const collect=async()=>{if(!active||collecting)return;collecting=true;try{const {error}=await supabase.rpc('claim_card_income');if(!error&&active)await refresh().catch(()=>{});}finally{collecting=false;}};void collect();const timer=window.setInterval(()=>{void collect();},10000);return()=>{active=false;window.clearInterval(timer)};},[user?.id]);
  useEffect(()=>{if(!user)return;let alive=true;const channel=supabase.channel('cardsnoscam-arena-online',{config:{presence:{key:user.id}}});channel.on('presence',{event:'sync'},()=>{if(!alive)return;const list=Object.values(channel.presenceState()).flat() as any[];const unique=new Map<string,any>();list.forEach(p=>{if(p.user_id&&p.user_id!==user.id)unique.set(p.user_id,p)});setOnlinePlayers([...unique.values()]);});channel.subscribe(async status=>{if(status==='SUBSCRIBED')await channel.track({user_id:user.id,username:user.user_metadata?.username||user.email?.split('@')[0]||'Spieler',online_at:new Date().toISOString()});});return()=>{alive=false;void supabase.removeChannel(channel);};},[user?.id]);
  useEffect(()=>{if(!user)return;let alive=true;const load=async()=>{const {data,error}=await supabase.from('battles').select('*').or('player_one.eq.'+user.id+',player_two.eq.'+user.id).order('created_at',{ascending:false}).limit(20);if(error){if(alive)fail(error);return;}if(!alive)return;const rows=data||[];setArenaBattles(rows);setArenaBattle((prev:any)=>rows.find((b:any)=>b.id===prev?.id)||rows.find((b:any)=>['invite','lineup','playing'].includes(b.status))||rows[0]||null);const due=rows.find((b:any)=>(b.status==='lineup'||b.status==='playing')&&b.phase_deadline&&new Date(b.phase_deadline).getTime()<=Date.now());if(due)await supabase.rpc('arena_resolve_if_due',{p_battle_id:due.id});};void load();const timer=window.setInterval(()=>{if(alive)void load();},1100);const channel=supabase.channel('cardsnoscam-arena-battles').on('postgres_changes',{event:'*',schema:'public',table:'battles'},()=>{if(alive)void load();}).subscribe();return()=>{alive=false;window.clearInterval(timer);void supabase.removeChannel(channel);};},[user?.id]);
 

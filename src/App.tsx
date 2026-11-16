@@ -164,7 +164,7 @@ export default function App(){
  function toggleArenaCard(id:string){setArenaSelected(prev=>prev.includes(id)?prev.filter(x=>x!==id):prev.length<10?[...prev,id]:prev)}
 
  const income=useMemo(()=>inventory.reduce((sum,i)=>sum+Number(i.cards?.income_per_second||0)*i.quantity,0),[inventory]);
- const displayedWallet=wallet===null?0:wallet+income*Math.min(3600,Math.max(0,(clockNow-lastIncomeAt)/1000));
+ const displayedWallet=wallet===null?0:wallet; // Nur tatsächlich gespeicherte Coins anzeigen und für Käufe verwenden.
  const activeCards=useMemo(()=>cards.filter(c=>c.active),[cards]);
  const patrickJaneCard=cards.find(c=>/patrick\s*jane/i.test(c.name));
  const rarityOrder:Record<string,number>={OG:6,MYTHIC:5,LEGENDARY:4,EPIC:3,RARE:2,COMMON:1};
